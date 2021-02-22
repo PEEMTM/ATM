@@ -5,6 +5,7 @@
 #include<cstdlib>
 #include<cstring>
 #include<iomanip>
+#include <stdio.h>
 #include <time.h>
 
 using namespace std;
@@ -87,9 +88,9 @@ void Withdraw(vector<string> &names,vector<float> &moneys,string key){
     if(status != 1) cout << "Cannot found." << endl;
     cout << "---------------------------------\n";
 }
-	
-void Transfer(vector<string> &names,vector<float> &moneys,string key){
-    int N = names.size();
+
+/*void Transfer(vector<string> &names,vector<float> &moneys,string key){
+	int N = names.size();
     int status = 0,transfer;
     cout << "---------------------------------\n";
     for(int i = 0 ; i < N ; i++){
@@ -107,97 +108,23 @@ void Transfer(vector<string> &names,vector<float> &moneys,string key){
             status = 1;}
     if(status != 1) cout << "Cannot found." << endl;
     cout << "---------------------------------\n";
-}
-
+}*/
 
 void receipt(){
-		char date[9];
-	    char time[9];
-	    _strdate(date);
-		_strtime(time);
-			cout << " . . .PRINTING RECEIPT . . .\n";
-			waiting(3000);
-			cout << "DATE:   "<< date ;
-			cout << "TIME:   "<< time ;
-	}
+		system("cls");
+	time_t rawtime;
+    struct tm * local;
+    time(&rawtime);
+    local = localtime(&rawtime);
 
-int main(){
-    string filename = "Bank.txt";
-    vector<string> names;
-    vector<float> moneys;
-    string key;
-    importDataFromFile(filename, names, moneys);
-    cout<<"Please input your name : ";
-	getline(cin,key);
-	key = toUpperStr(key);
-	cout<<"Please select your order"<<endl;
-	cout<<"1 : Deposit"<<"     "<<"2 : Withdraw"<<"     "<<"3 : Transfer"<<endl;
-	cout<<"4 : View transaction history"<<"     "<<"5 : EXIT"<<endl;
-	while(true){
-		cout<<"Please select number(1-5) : ";
-		cin>>x;
-		if(x>0&&x<6) break;
-		else cout<<"Please select again"<<endl;
-	}
-		if(x == 1) Deposit(names, moneys, key);
-		if(x == 2) Withdraw(names, moneys, key);
-		if(x == 3) Transfer(names, moneys, key);
-        if(x == 4) searchName(names, moneys, key);
-
-    return 0;
-}
-void searchName(vector<string> &names,vector<float> &moneys,string key){
-    int N = names.size();
-    int status = 0;
-    cout << "---------------------------------\n";
-    for(int i = 0 ; i < N ; i++){
-        if(key == toUpperStr(names[i])){
-            cout << names[i] << "'s moneys = " << moneys[i] << endl;
-            status = 1;
-        }
-    }
-    if(status != 1) cout << "Cannot found." << endl;
-    cout << "---------------------------------\n";
-}
-
-void Deposit(vector<string> &names,vector<float> &moneys,string key){
-    int N = names.size();
-    int status = 0,deposit;
-    cout << "---------------------------------\n";
-    for(int i = 0 ; i < N ; i++){
-        if(key == toUpperStr(names[i])){
-        	sname=names[i];
-        	m=i;
-        }
-    }
-	cout << sname << "'s Money in the account now = " << fixed << setprecision(2) << moneys[m] << endl;
-    cout <<"How much will you deposit?";
-        	cin>>deposit;
-        	moneys[m]+=deposit;
-            cout << sname << "'s balance = " << fixed << setprecision(2) << moneys[m] << endl;
-            status = 1;
-    if(status != 1) cout << "Cannot found." << endl;
-    cout << "---------------------------------\n";
-}
-void Withdraw(vector<string> &names,vector<float> &moneys,string key){
-    int N = names.size();
-    int status = 0,withdraw;
-    cout << "---------------------------------\n";
-    for(int i = 0 ; i < N ; i++){
-        if(key == toUpperStr(names[i])){
-        	sname=names[i];
-        	m=i;
-        }
-    }
-	cout << sname << "'s Money in the account now = " << fixed << setprecision(2) << moneys[m] << endl;
-    cout <<"How much will you withdraw?";
-        	cin>>withdraw;
-        	if(moneys[m] >= withdraw){
-			moneys[m]-=withdraw;
-            cout << sname << "'s balance = " << fixed << setprecision(2) << moneys[m] << endl;
-            status = 1;}
-    if(status != 1) cout << "Cannot found." << endl;
-    cout << "---------------------------------\n";
+			cout << "\n\n\t\t\t\t\t PRINTING RECEIPT . . .\n";
+			system("cls");
+			cout << endl <<"\n\n\t\t\t|\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2  \xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2\xB2|";
+			cout << "\n\t\t\t|\t\t\t\t\t      |"
+				 << "\n\t\t\t|\t     ATM TRANSACTION RECORD\t      |"
+				 << "\n\t\t\t|\t\t\t\t\t      |"
+				 << "\n\t\t\t|DATE:\t\t\t    "<<local->tm_mday<<":"<<local->tm_mon<<":"<< local->tm_year <<"\t      |"
+				 << "\n\t\t\t|TIME:\t\t\t    "<<local->tm_hour<<":"<<local->tm_min<<":"<< local->tm_sec <<"\t      |";
 }
 
 int main(){
@@ -219,7 +146,10 @@ int main(){
 		else cout<<"Please select again"<<endl;
 	}
         if(x == 1) Deposit(names, moneys, key);
+	if(x == 2) Withdraw(names, moneys, key);
+	if(x == 3) Transfer(names, moneys, key);
         if(x == 4) searchName(names, moneys, key);
+}
 
     return 0;
 }
