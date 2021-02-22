@@ -34,20 +34,14 @@ int main(){
 		case 1:
 			cout<<"Enter the amount of the deposit = ";
 			cin>>deposit;
-			sdeposit =  to_string(deposit);
-			source<<"    "<<sdeposit;
 			break;
 		case 2:
 			cout<<"Enter the amount of the Withdraw = ";
 			cin>>Withdraw;
-			sWithdraw = to_string(Withdraw);
-			source<<"    "<<sWithdraw;
 			break;
 		case 3:
 			cout<<"Enter the amount of the Withdraw = ";
 			cin>>Transfer;
-			sTransfer = to_string(Transfer);
-			source<<"    "<<sTransfer;
 			break;
 	}
 	
